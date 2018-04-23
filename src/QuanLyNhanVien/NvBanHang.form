@@ -31,7 +31,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="252" max="-2" attributes="0"/>
-                              <Component id="btSuaNv" min="-2" max="-2" attributes="0"/>
+                              <Component id="btLuuNv" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="126" max="-2" attributes="0"/>
                               <Component id="btXoaNv" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -56,7 +56,7 @@
               <Component id="ScrPDsNv" min="-2" pref="409" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btSuaNv" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btLuuNv" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btXoaNv" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="18" max="32767" attributes="0"/>
@@ -139,13 +139,16 @@
         <Property name="text" type="java.lang.String" value="Danh s&#xe1;ch nh&#xe2;n vi&#xea;n b&#xe1;n h&#xe0;ng"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="btSuaNv">
+    <Component class="javax.swing.JButton" name="btLuuNv">
       <Properties>
-        <Property name="text" type="java.lang.String" value="S&#x1eed;a"/>
+        <Property name="text" type="java.lang.String" value="L&#x1b0;u"/>
         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[85, 23]"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btLuuNvActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btXoaNv">
       <Properties>
@@ -154,6 +157,9 @@
           <Dimension value="[85, 23]"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btXoaNvActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

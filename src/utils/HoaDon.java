@@ -15,16 +15,14 @@ public class HoaDon {
     private String maHoaDon;
     private String tenNguoiBan;
     private String ngayBan;
-    private String tenKhachHang;
-    private String SDTKhachHang;
+    private KhachHang khachHang;
     private ArrayList<SanPham> listSanPham;
 
     public HoaDon(String maHoaDon, String tenNguoiBan, String ngayBan, String tenKhachHang, String SDTKhachHang, ArrayList<SanPham> listSanPham) {
         this.maHoaDon = maHoaDon;
         this.tenNguoiBan = tenNguoiBan;
         this.ngayBan = ngayBan;
-        this.tenKhachHang = tenKhachHang;
-        this.SDTKhachHang = SDTKhachHang;
+        this.khachHang = new KhachHang(tenKhachHang,SDTKhachHang);
         this.listSanPham = listSanPham;
     }
 
@@ -73,13 +71,6 @@ public class HoaDon {
         this.ngayBan = ngayBan;
     }
 
-    public String getTenKhachHang() {
-        return tenKhachHang;
-    }
-
-    public void setTenKhachHang(String tenKhachHang) {
-        this.tenKhachHang = tenKhachHang;
-    }
 
     public ArrayList<SanPham> getListSanPham() {
         return listSanPham;
@@ -89,13 +80,15 @@ public class HoaDon {
         this.listSanPham = listSanPham;
     }
 
-    public String getSDTKhachHang() {
-        return SDTKhachHang;
+    public KhachHang getKhachHang() {
+        return khachHang;
     }
 
-    public void setSDTKhachHang(String SDTKhachHang) {
-        this.SDTKhachHang = SDTKhachHang;
+    public void setKhachHang(KhachHang khachHang) {
+        this.khachHang = khachHang;
     }
+
+    
     
     
     

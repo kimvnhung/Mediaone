@@ -14,7 +14,7 @@ public class NhanVienThuNgan extends NhanVien{
 
     public NhanVienThuNgan(int id,String ten, int tuoi, boolean gioiTinh, String diaChi, String SDT,String loaiNhanVien, int luong, String username,String password) {
         super(id,ten,tuoi,gioiTinh,diaChi,SDT,loaiNhanVien,luong);
-        this.account = new Account(username,password);
+        this.account = new Account(id,username,password);
     }
 
     public Account getAccount() {

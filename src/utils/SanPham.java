@@ -12,21 +12,44 @@ package utils;
 public class SanPham {
     private String maSanPham;
     private String ten;
+    private String loaiMatHang;
     private String theLoai;
     
     private int soLuong;
     private int giaMua;
     private int giaBan;
 
-    public SanPham(String maSanPham, String ten, String theLoai, int soLuong, int giaMua, int giaBan) {
+    public SanPham(String maSanPham, String ten, String loaiMatHang, String theLoai, int soLuong, int giaMua, int giaBan) {
         this.maSanPham = maSanPham;
         this.ten = ten;
+        this.loaiMatHang = loaiMatHang;
         this.theLoai = theLoai;
         this.soLuong = soLuong;
         this.giaMua = giaMua;
         this.giaBan = giaBan;
     }
 
+    public String getLoaiMatHang() {
+        return loaiMatHang;
+    }
+
+    public void setLoaiMatHang(String loaiMatHang) {
+        this.loaiMatHang = loaiMatHang;
+    }
+
+    
+    
+    public String getMaSanPham() {
+        return maSanPham;
+    }
+
+    public void setMaSanPham(String maSanPham) {
+        this.maSanPham = maSanPham;
+    }
+
+    
+    
+    
     public void setTen(String ten) {
         this.ten = ten;
     }

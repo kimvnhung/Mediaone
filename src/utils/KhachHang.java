@@ -13,16 +13,32 @@ import java.util.ArrayList;
  */
 public class KhachHang {
     private String tenKhachHang;
-    private ArrayList<HoaDon> listHoaDon;
     private String SDT;
 
-    public KhachHang(String tenKhachHang, ArrayList<HoaDon> listHoaDon, String SDT) {
+    public KhachHang(String tenKhachHang, String SDT) {
         this.tenKhachHang = tenKhachHang;
-        this.listHoaDon = listHoaDon;
         this.SDT = SDT;
     }
     
-    public void thanhToan(){
+    public void thanhToan(HoaDon hd){
         
     }
+
+    public String getTenKhachHang() {
+        return tenKhachHang;
+    }
+
+    public void setTenKhachHang(String tenKhachHang) {
+        this.tenKhachHang = tenKhachHang;
+    }
+
+    public String getSDT() {
+        return SDT;
+    }
+
+    public void setSDT(String SDT) {
+        this.SDT = SDT;
+    }
+    
+    
 }

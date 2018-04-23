@@ -25,23 +25,24 @@ public class CuaHang {
     private ArrayList<Sach> listSach;
     private ArrayList<ChiPhiKhac> listChiPhiKhac;
 
-    public CuaHang(String admin,
-            ArrayList<NhanVien> listNhanVien, ArrayList<NhanVienThuNgan> listNhanVienThuNgan,
-            ArrayList<DiaNhac> listDiaNhac, ArrayList<DiaPhim> listDiaPhim, ArrayList<Sach> listSach, 
-            ArrayList<ChiPhiKhac> listChiPhiKhac) throws SQLException, ClassNotFoundException {
-        this.chuCuaHang = admin;
-        this.listNhanVienBanHang = listNhanVien;
-        this.listNhanVienThuNgan = listNhanVienThuNgan;
-        this.listDiaNhac = listDiaNhac;
-        this.listDiaPhim = listDiaPhim;
-        this.listSach = listSach;
-        this.listChiPhiKhac = listChiPhiKhac;
-        
+    public CuaHang() throws SQLException, ClassNotFoundException {
         connection = new MyConnection();
+        updateData();
     }
     
     public void themNhanVien(NhanVien nhanVienMoi) throws SQLException{
         connection.insertIntoNhanVien(nhanVienMoi);
+        
+        
+        if(nhanVienMoi.getLoaiNhanVien().equals("Nhân Viên Thu Ngân")){
+            getListNhanVienThuNgan().add((NhanVienThuNgan) nhanVienMoi);
+        }else{
+            getListNhanVienBanHang().add(nhanVienMoi);
+        }
+    }
+    
+    public void updateNhanVien(){
+        
     }
     
     public void nhapKhoHang(){
@@ -64,7 +65,17 @@ public class CuaHang {
         return false;
     }
 
-    public void updateData(){
+    
+    
+    public void updateData() throws SQLException{
+        this.setChuCuaHang(connection.getAdminAcount().getUsername());
+        this.setListNhanVienBanHang(connection.getListNhanVienBanHang());
+        this.setListNhanVienThuNgan(connection.getListNhanVienThuNgan());
+        this.setListDiaNhac(new ArrayList<DiaNhac>());
+        this.setListDiaPhim(new ArrayList<DiaPhim>());
+        this.setListSach(new ArrayList<Sach>());
+        this.setListChiPhiKhac(new ArrayList<ChiPhiKhac>());
+        
         
     }
     
@@ -109,6 +120,30 @@ public class CuaHang {
 
     public void setListNhanVienThuNgan(ArrayList<NhanVienThuNgan> listNhanVienThuNgan) {
         this.listNhanVienThuNgan = listNhanVienThuNgan;
+    }
+
+    public void setChuCuaHang(String chuCuaHang) {
+        this.chuCuaHang = chuCuaHang;
+    }
+
+    public void setListNhanVienBanHang(ArrayList<NhanVien> listNhanVienBanHang) {
+        this.listNhanVienBanHang = listNhanVienBanHang;
+    }
+
+    public void setListDiaNhac(ArrayList<DiaNhac> listDiaNhac) {
+        this.listDiaNhac = listDiaNhac;
+    }
+
+    public void setListDiaPhim(ArrayList<DiaPhim> listDiaPhim) {
+        this.listDiaPhim = listDiaPhim;
+    }
+
+    public void setListSach(ArrayList<Sach> listSach) {
+        this.listSach = listSach;
+    }
+
+    public void setListChiPhiKhac(ArrayList<ChiPhiKhac> listChiPhiKhac) {
+        this.listChiPhiKhac = listChiPhiKhac;
     }
     
     

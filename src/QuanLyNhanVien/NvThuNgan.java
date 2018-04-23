@@ -37,4 +37,6 @@ public class NvThuNgan extends NvBanHang {
             tm.addRow(newRow);
         }
     }
+    
+    
 }

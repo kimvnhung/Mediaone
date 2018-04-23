@@ -58,15 +58,7 @@ public class HomeFrame extends javax.swing.JFrame {
         
         
         myConnection = new MyConnection();
-        cuaHang = new CuaHang(
-                myConnection.getAdminAcount().getUsername(),
-                myConnection.getListNhanVienBanHang(),
-                myConnection.getListNhanVienThuNgan(),
-                new ArrayList<DiaNhac>(),
-                new ArrayList<DiaPhim>(),
-                new ArrayList<Sach>(),
-                new ArrayList<ChiPhiKhac>()
-        );
+        cuaHang = new CuaHang();
         if(cuaHang.isAdmin(username)){
             menuQuanLyNhanVien.setEnabled(true);
         }else{

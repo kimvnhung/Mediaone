@@ -14,8 +14,8 @@ public class DiaPhim extends SanPham{
     private String dienVien;
     private String chatLuong;
 
-    public DiaPhim( String maSanPham,String ten, String daoDien, String dienVien, String chatLuong,String theLoai, int soLuong, int giaMua, int giaBan) {
-        super(maSanPham,ten, theLoai, soLuong, giaMua, giaBan);
+    public DiaPhim( String maSanPham,String ten, String loaiSanPham, String daoDien, String dienVien, String chatLuong,String theLoai, int soLuong, int giaMua, int giaBan) {
+        super(maSanPham,ten, loaiSanPham ,theLoai, soLuong, giaMua, giaBan);
         this.daoDien = daoDien;
         this.dienVien = dienVien;
         this.chatLuong = chatLuong;

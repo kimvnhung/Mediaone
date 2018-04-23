@@ -14,8 +14,14 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import utils.Account;
+import utils.ChiPhiKhac;
+import utils.DiaNhac;
+import utils.DiaPhim;
+import utils.HoaDon;
 import utils.NhanVien;
 import utils.NhanVienThuNgan;
+import utils.Sach;
+import utils.SanPham;
 
 /**
  *
@@ -47,6 +53,38 @@ public class MyConnection {
     public static final String COLUMN_NV_LOGIN_2 = "username";
     public static final String COLUMN_NV_LOGIN_3 = "pass";
     
+    public static final String TABLE_DS_SP = "ds_san_pham";
+    public static final String COLUMN_DS_SP_1 = "ma_mh";
+    public static final String COLUMN_DS_SP_2 = "ten_mh";
+    public static final String COLUMN_DS_SP_3 = "loai_mh";
+    public static final String COLUMN_DS_SP_4 = "ton_kho";
+    public static final String COLUMN_DS_SP_5 = "gia_mua";
+    public static final String COLUMN_DS_SP_6 = "gia_ban";
+    
+    public static final String TABLE_CT_SP = "chi_tiet_sp";
+    public static final String COLUMN_CT_SP_1 = "ma_mh";
+    public static final String COLUMN_CT_SP_2 = "ref1";
+    public static final String COLUMN_CT_SP_3 = "ref2";
+    public static final String COLUMN_CT_SP_4 = "ref3";
+    public static final String COLUMN_CT_SP_5 = "the_loai";
+    
+    public static final String TABLE_HOA_DON = "hoa_don";
+    public static final String COLUMN_HOA_DON_1 = "ma_hd";
+    public static final String COLUMN_HOA_DON_2 = "nguoi_ban";
+    public static final String COLUMN_HOA_DON_3 = "ngay_ban";
+    public static final String COLUMN_HOA_DON_4 = "ten_khach_hang";
+    public static final String COLUMN_HOA_DON_5 = "sdt";
+    
+    public static final String TABLE_CT_HD = "chi_tiet_hd";
+    public static final String COLUMN_CT_HD_1 = "ma_hd";
+    public static final String COLUMN_CT_HD_2 = "nguoi_mh";
+    public static final String COLUMN_CT_HD_3 = "so_luong";
+    
+    public static final String TABLE_CPPS = "chi_phi_phat_sinh";
+    public static final String COLUMN_CPPS_1 = "ten_chi_phi";
+    public static final String COLUMN_CPPS_2 = "so_tien";
+    public static final String COLUMN_CPPS_3 = "tren_don_vi";
+    
     public MyConnection() throws ClassNotFoundException, SQLException{
         connect();
         connectable = true;
@@ -74,7 +112,7 @@ public class MyConnection {
         int result = st.executeUpdate(insert);
     }
     
-    //thêm dữ liệu vào bảng nhan_vien và nv_login
+    //thêm dữ liệu vào bảng nhan_vien  
     public void insertIntoNhanVien(NhanVien nhanVienMoi) throws SQLException{
         Statement st = myConnection.createStatement();
         String insert = "INSERT INTO " + TABLE_NHAN_VIEN + " VALUES ( DEFAULT ,\""
@@ -87,12 +125,125 @@ public class MyConnection {
                 + nhanVienMoi.getLuong() + " )";
         int result = st.executeUpdate(insert);
         if(nhanVienMoi.getLoaiNhanVien().equals("Nhân Viên Thu Ngân")){
-           insert = "INSERT INTO " + TABLE_NV_LOGIN + " VALUES ( DEFAULT ,\""
-                   + ((NhanVienThuNgan) nhanVienMoi).getAccount().getUsername() + "\" , \""
-                   + ((NhanVienThuNgan) nhanVienMoi).getAccount().getUsername() + "\" )";
-           result = st.executeUpdate(insert);
+           insertIntoNvLogin(((NhanVienThuNgan) nhanVienMoi).getAccount());
         }
         
+    }
+    
+    //thêm dữ liệu vào bảng nv_login
+    public void insertIntoNvLogin(Account acc) throws SQLException{
+        Statement st = myConnection.createStatement();
+        
+        String insert = "INSERT INTO " + TABLE_NV_LOGIN + " VALUES ( "
+                + acc.getId()+" ,\""
+                + acc.getUsername() + "\" , \""
+                + acc.getUsername() + "\" )";
+        int result = st.executeUpdate(insert);
+    }
+    
+    //thêm dữ liệu vào bảng ds_san_pham
+    public void insertIntoDsSanPham(SanPham sanPhamMoi) throws SQLException{
+        Statement st = myConnection.createStatement();
+        
+        String insert = "INSERT INTO " + TABLE_DS_SP + " VALUES ( "
+                + sanPhamMoi.getMaSanPham() +" ,\""
+                + sanPhamMoi.getTen() + "\" , \""
+                + sanPhamMoi.getLoaiMatHang() + "\", "
+                + sanPhamMoi.getSoLuong() + " , "
+                + sanPhamMoi.getGiaMua() + " , "
+                + sanPhamMoi.getGiaBan()+ " )";
+        int result = st.executeUpdate(insert);
+        switch(sanPhamMoi.getLoaiMatHang()){
+            case "Đĩa Nhạc":
+                DiaNhac sp1 = (DiaNhac) sanPhamMoi;
+                insert = "INSERT INTO " + TABLE_CT_SP + " VALUES ("
+                        + sp1.getMaSanPham() +" , \" "
+                        + sp1.getNhacSi() +"\" , \""
+                        + sp1.getCaSi() + "\" , \""
+                        + sp1.getAlbumn() + "\" , \""
+                        + sp1.getTheLoai() +"\" )";
+                result = st.executeUpdate(insert);
+                break;
+            case "Đĩa Phim":
+                DiaPhim sp2 = (DiaPhim) sanPhamMoi;
+                insert = "INSERT INTO " + TABLE_CT_SP + " VALUES ("
+                        + sp2.getMaSanPham() +" , \" "
+                        + sp2.getDaoDien()+"\" , \""
+                        + sp2.getDienVien()+ "\" , \""
+                        + sp2.getChatLuong()+ "\" , \""
+                        + sp2.getTheLoai() +"\" )";
+                result = st.executeUpdate(insert);
+                break;
+            default:
+                Sach sp3 = (Sach) sanPhamMoi;
+                insert = "INSERT INTO " + TABLE_CT_SP + " VALUES ("
+                        + sp3.getMaSanPham() +" , \" "
+                        + sp3.getTacGia()+"\" , \""
+                        + sp3.getNxb()+ "\" , \""
+                        + sp3.getNgonNgu()+ "\" , \""
+                        + sp3.getTheLoai() +"\" )";
+                result = st.executeUpdate(insert);
+                break;
+        }
+    }
+    
+    //thêm thông tin bảng hoa_don và chi tiết hóa đơn
+    public void insertIntoHoaDon(HoaDon hd) throws SQLException{
+        Statement st = myConnection.createStatement();
+        String insert = "INSERT INTO "+TABLE_HOA_DON + " VALUES ("
+                +"DEFAULT , \""
+                + hd.getTenNguoiBan() + "\", \""
+                + hd.getNgayBan() +"\" , \""
+                + hd.getKhachHang().getTenKhachHang() + "\", \""
+                + hd.getKhachHang().getSDT()+ "\")";
+        int result = st.executeUpdate(insert);
+        
+        int soLuong = hd.getListSanPham().size();
+        for(int i = 0; i < soLuong; i++){
+            insert = "INSERT INTO "+TABLE_CT_HD +" VALUES ("
+                + hd.getMaHoaDon() +" , "
+                + hd.getListSanPham().get(i).getMaSanPham() +" , "
+                + hd.getListSanPham().get(i).getSoLuong() + " )";
+            result = st.executeUpdate(insert);
+        }
+    }
+    
+    //thêm thông tin bảng chi phi phát sinh
+    public void insertIntoChiPhiPhatSinh(ChiPhiKhac cp) throws SQLException{
+        Statement st = myConnection.createStatement();
+        String insert = "INSERT INTO "+TABLE_CPPS +" VALUES (\""
+                + cp.getTenChiPhi() + "\" , "
+                + cp.getSoTien() +" , \""
+                + cp.getTrenDonVi()+"\" )";
+        int result = st.executeUpdate(insert);
+    }
+    
+    //Cập nhật thông tin nhân viên
+    public void updateToNhanVien(NhanVien nvUpdate) throws SQLException{
+        Statement st = myConnection.createStatement();
+        String update = "UPDATE "+TABLE_NHAN_VIEN + " SET "
+                + COLUMN_NHAN_VIEN_2 +" = \""+nvUpdate.getTen()+"\" , "
+                + COLUMN_NHAN_VIEN_3 +" = "+nvUpdate.getTuoi()+" , "
+                + COLUMN_NHAN_VIEN_4 +" = "+nvUpdate.getGioiTinh()+" , "
+                + COLUMN_NHAN_VIEN_5 +" = \""+nvUpdate.getDiaChi()+" , "
+                + COLUMN_NHAN_VIEN_6 +" = \""+nvUpdate.getSDT()+"\" , "
+                + COLUMN_NHAN_VIEN_7 +" = \""+nvUpdate.getLoaiNhanVien()+"\" , "
+                + COLUMN_NHAN_VIEN_8 +" = "+nvUpdate.getLuong()+" WHERE "
+                + COLUMN_NHAN_VIEN_1 +" = "+nvUpdate.getId();
+        int result = st.executeUpdate(update);
+        if(nvUpdate.getLoaiNhanVien().equals("Nhân Viên Thu Ngân")){
+            updateToNvLogin(((NhanVienThuNgan) nvUpdate).getAccount());
+        }
+    }
+    //Cập nhật thông tin nv_login
+    public void updateToNvLogin(Account acc) throws SQLException{
+        Statement st = myConnection.createStatement();
+        String update = "UPDATE "+TABLE_NV_LOGIN + " SET "
+                + COLUMN_NV_LOGIN_2 + " = \""+acc.getUsername()+"\", "
+                + COLUMN_NV_LOGIN_3 + " = \""+acc.getPassword()+"\" WHERE "
+                + COLUMN_NV_LOGIN_1 + " = "+acc.getId();
+        
+        int result = st.executeUpdate(update);
     }
     
     //đếm số hàng bảng admin
@@ -113,7 +264,7 @@ public class MyConnection {
         String select = "SELECT * FROM "+TABLE_ADMIN;
         ResultSet rs = st.executeQuery(select);
         rs.first();
-        Account admin = new Account(rs.getString(1),rs.getString(2));
+        Account admin = new Account(0,rs.getString(1),rs.getString(2));
         rs.close();
         return admin;
     }
@@ -126,7 +277,7 @@ public class MyConnection {
         //rs.first();
         ArrayList<Account> result = new ArrayList<>();
         while(rs.next()){
-            result.add(new Account(rs.getString(2),rs.getString(3)));
+            result.add(new Account(rs.getInt(1),rs.getString(2),rs.getString(3)));
         }
         rs.close();
         return result;

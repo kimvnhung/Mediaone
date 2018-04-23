@@ -323,8 +323,9 @@ public class ThemNv extends javax.swing.JPanel {
                 nhanVienMoi = nhanVienThuNganMoi;
             }
             
-            if(!isTxtfEmpty(ten,tuoi,SDT,luong) || 
-                    (nhanVienMoi.getLoaiNhanVien().equals("Nhân Viên Thu Ngân") && !isTxtfEmpty(username))){
+            if(!isTxtfEmpty(ten,tuoi,SDT,luong) && 
+                    (nhanVienMoi.getLoaiNhanVien().equals("Nhân Viên Bán Hàng") || !isTxtfEmpty(username))){
+                
                 HomeFrame.cuaHang.themNhanVien(nhanVienMoi);
                 JOptionPane.showMessageDialog(this,"Thêm nhân viên thành công!");
                 resetData();
@@ -338,7 +339,7 @@ public class ThemNv extends javax.swing.JPanel {
             }
             
             try{
-                int lương = Integer.parseInt(txtfLuongThemNv.getText());
+                int luong = Integer.parseInt(txtfLuongThemNv.getText());
             }catch(NumberFormatException e1){
                 notifyError(txtfLuongThemNv,"Lương phải là số tự nhiên!");
             }

@@ -14,8 +14,8 @@ public class Sach extends SanPham{
     private String nxb;
     private String ngonNgu;
 
-    public Sach(String maSanPham, String ten, String tacGia, String nxb, String ngonNgu, String theLoai, int soLuong, int giaMua, int giaBan) {
-        super(maSanPham,ten, theLoai, soLuong, giaMua, giaBan);
+    public Sach(String maSanPham, String ten, String loaiSanPham, String tacGia, String nxb, String ngonNgu, String theLoai, int soLuong, int giaMua, int giaBan) {
+        super(maSanPham,ten, loaiSanPham ,theLoai, soLuong, giaMua, giaBan);
         this.tacGia = tacGia;
         this.nxb = nxb;
         this.ngonNgu = ngonNgu;

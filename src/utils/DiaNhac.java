@@ -15,8 +15,8 @@ public class DiaNhac extends SanPham{
     private String caSi;
     private String albumn;
 
-    public DiaNhac( String maSanPham,String ten, String nhacSi, String caSi, String albumn, String theLoai, int soLuong, int giaMua, int giaBan) {
-        super(maSanPham,ten, theLoai, soLuong, giaMua, giaBan);
+    public DiaNhac( String maSanPham,String ten, String loaiSanPham, String nhacSi, String caSi, String albumn, String theLoai, int soLuong, int giaMua, int giaBan) {
+        super(maSanPham,ten, loaiSanPham ,theLoai, soLuong, giaMua, giaBan);
         this.nhacSi = nhacSi;
         this.caSi = caSi;
         this.albumn = albumn;
