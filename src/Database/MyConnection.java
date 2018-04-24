@@ -48,10 +48,7 @@ public class MyConnection {
     public static final String COLUMN_NHAN_VIEN_7 = "loai_nhan_vien";
     public static final String COLUMN_NHAN_VIEN_8 = "luong";
     
-    public static final String TABLE_NV_LOGIN = "nv_login";
-    public static final String COLUMN_NV_LOGIN_1 = "id";
-    public static final String COLUMN_NV_LOGIN_2 = "username";
-    public static final String COLUMN_NV_LOGIN_3 = "pass";
+    
     
     public static final String TABLE_DS_SP = "ds_san_pham";
     public static final String COLUMN_DS_SP_1 = "ma_mh";
@@ -318,5 +315,11 @@ public class MyConnection {
     public boolean isConnectable() {
         return connectable;
     }
+
+    public Connection getMyConnection() {
+        return myConnection;
+    }
+    
+    
     
 }
